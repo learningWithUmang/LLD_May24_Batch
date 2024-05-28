@@ -5,6 +5,11 @@ public class Student {
     double psp;
     String univName;
     int roomNo;
+
+    void fillCoffee(Student st){
+        st = new Student();
+        System.out.println("Sometjhing");
+    }
 //    Student(){
 //        rollNo = 6;
 //        psp = 0.90;

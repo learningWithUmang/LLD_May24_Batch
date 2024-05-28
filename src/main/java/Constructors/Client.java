@@ -17,13 +17,19 @@ public class Client {
         st1.rollNo = 4;
         st1.psp = 90;
 
+        st1.fillCoffee(st1);
+
+
 //        Student st2 = new Student();
 //        st2.roomNo = 1;
 //        st2.univName = "ABC";
 //        st2.rollNo = 4;
 //        st2.psp = 90;
 
+
+
         Student st1Copy = new Student(st1);
+        //st1Copy.univName = "XYZ";
 
         /*
         I want to create a new object with exact same set of values for the attributes
