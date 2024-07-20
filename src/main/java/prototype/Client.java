@@ -21,6 +21,11 @@ public class Client {
         StudentRegistry studentRegistry = new StudentRegistry();
         fillRegistry(studentRegistry);
 
+        Student prototype = studentRegistry.get("july23BegineerBatch");
+        prototype.moduleName = "Sfw";
+        //prototype.iq = "23";
+        studentRegistry.register("july23BegineerBatch", prototype);
+
 
         Student hetul = studentRegistry.get("july23BegineerBatch").clone();
         hetul.setName("hetul");
