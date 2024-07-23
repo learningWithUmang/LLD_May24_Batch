@@ -1,6 +1,7 @@
 package TicTacToe.models;
 
 import TicTacToe.exceptions.InvalidBotCountException;
+import TicTacToe.exceptions.InvalidMoveException;
 import TicTacToe.exceptions.InvalidPlayerCountException;
 import TicTacToe.strategies.winningstrategies.WinningStrategy;
 
@@ -29,10 +30,71 @@ public class Game {
         return new Builder();
     }
 
-    public void makeMove(){
+    private boolean validateMove(Move move){
+        Cell cell = move.getCell();
+        int row = cell.getRow();
+        int col = cell.getCol();
 
+        //validated if the row and col numbers are within boundary
+        if(row < 0 || col < 0 || row >= board.getDimension() || col >= board.getDimension()){
+            return false;
+        }
+
+        //validate if the cell is not empty
+        if(board.getBoard().get(row).get(col).getCellState().equals(CellState.FILLED)){
+            return false;
+        }
+
+        return true;
     }
 
+    public void makeMove() throws InvalidMoveException {
+        Player currentPlayer = players.get(nextPlayerMoveIndex);
+
+        System.out.println("It is " + currentPlayer.getName() + "'s turn");
+
+        //Ask the player to choose the move
+        Move move = currentPlayer.makeMove(board);
+
+        //Before executing this move, first validate that if the cell is not empty
+        if(!validateMove(move)){
+            throw new InvalidMoveException("Move is not valid");
+        }
+
+        //Valid move, let's execute on board
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
+
+        Cell cell = board.getBoard().get(row).get(col);
+        cell.setCellState(CellState.FILLED);
+        cell.setPlayer(currentPlayer);
+
+        Move finalMove = new Move(currentPlayer, cell);
+        moves.add(finalMove);
+
+        //[p1,p2,p3,p4] - list < players >
+        //index = 0, 1 , 2 , 3 , 0 , 1, ,2 ,3...
+        nextPlayerMoveIndex = (nextPlayerMoveIndex + 1) % players.size();
+
+
+        //Check if it's the winning move
+        if(checkWinner(finalMove)){
+            gameState = GameState.ENDED;
+            winner = currentPlayer;
+        }else if(moves.size() == board.getDimension() * board.getDimension()) {
+            gameState = GameState.DRAW;
+        }
+    }
+
+    private boolean checkWinner(Move move){
+        //Check the row, column and diagonals(if applicable)
+        for(WinningStrategy winningStrategy: winningStrategies){
+            if(winningStrategy.checkWinner(move,board)){
+                return true;
+            }
+        }
+        return false;
+    }
     public void printBoard(){
         board.print();
     }

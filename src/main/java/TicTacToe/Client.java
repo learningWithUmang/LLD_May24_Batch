@@ -2,8 +2,10 @@ package TicTacToe;
 
 import TicTacToe.controllers.GameController;
 import TicTacToe.exceptions.InvalidBotCountException;
+import TicTacToe.exceptions.InvalidMoveException;
 import TicTacToe.exceptions.InvalidPlayerCountException;
 import TicTacToe.models.*;
+import TicTacToe.strategies.winningstrategies.ColumnWinningStrategy;
 import TicTacToe.strategies.winningstrategies.DiagonalWinningStrategy;
 import TicTacToe.strategies.winningstrategies.RowWinningStrategy;
 import TicTacToe.strategies.winningstrategies.WinningStrategy;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    public static void main(String[] args) throws InvalidBotCountException, InvalidPlayerCountException {
+    public static void main(String[] args) throws InvalidBotCountException, InvalidPlayerCountException, InvalidMoveException {
 //        Player p1 = new Player("Umang", new Symbol('X'), PlayerType.HUMAN);
 //
 //        //Game.getBuilder().setPlayers().setsdfvjk().set()..build()
@@ -28,11 +30,12 @@ public class Client {
         int dimension = 3;
         List<Player> playerList = new ArrayList<>();
         playerList.add(new Player("Umang", new Symbol('X'), PlayerType.HUMAN));
-        playerList.add(new Player("Anmol", new Symbol('O'), PlayerType.HUMAN));
+        playerList.add(new Bot("intelligentBot", new Symbol('O'), BotDifficultyLevel.EASY));
 
         List<WinningStrategy> winningStrategies = new ArrayList<>();
         winningStrategies.add(new RowWinningStrategy());
         winningStrategies.add(new DiagonalWinningStrategy());
+        winningStrategies.add(new ColumnWinningStrategy());
 
 
 
@@ -41,7 +44,7 @@ public class Client {
                 playerList,
                 winningStrategies);
 
-        gameController.printBoard(game);
+        //gameController.printBoard(game);
 
         while(game.getGameState().equals(GameState.IN_PROGRESS)){
             /*
