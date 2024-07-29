@@ -95,6 +95,13 @@ public class Game {
         }
         return false;
     }
+
+    public void undo(Game game){
+        /*
+        remove the last move from the list and corresponding to that you have to make that
+        cell empty in the board and also go to the previous player.
+         */
+    }
     public void printBoard(){
         board.print();
     }

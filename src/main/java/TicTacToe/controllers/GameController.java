@@ -35,4 +35,8 @@ public class GameController {
     public Player getWinner(Game game){
         return game.getWinner();
     }
+
+    public void unDo(Game game){
+       game.undo(game);
+    }
 }
