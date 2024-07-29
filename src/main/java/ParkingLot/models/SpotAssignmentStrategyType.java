@@ -1,6 +1,6 @@
 package ParkingLot.models;
 
-public enum SpotAssignmentStrategy {
+public enum SpotAssignmentStrategyType {
     NEAREST,
     CHEAPEST,
     BALANCED,

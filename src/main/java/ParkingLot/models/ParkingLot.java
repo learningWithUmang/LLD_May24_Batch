@@ -7,7 +7,7 @@ public class ParkingLot extends BaseModal {
     private ParkingLotStatus parkingLotStatus;
     private List<Gate> gates;
     private List<VehicleType> supportedVehicleTypes;
-    private SpotAssignmentStrategy spotAssignmentStrategy;
+    private SpotAssignmentStrategyType spotAssignmentStrategyType;
 
     public List<ParkingFloor> getParkingFloors() {
         return parkingFloors;
@@ -41,11 +41,11 @@ public class ParkingLot extends BaseModal {
         this.supportedVehicleTypes = supportedVehicleTypes;
     }
 
-    public SpotAssignmentStrategy getSpotAssignmentStrategy() {
-        return spotAssignmentStrategy;
+    public SpotAssignmentStrategyType getSpotAssignmentStrategy() {
+        return spotAssignmentStrategyType;
     }
 
-    public void setSpotAssignmentStrategy(SpotAssignmentStrategy spotAssignmentStrategy) {
-        this.spotAssignmentStrategy = spotAssignmentStrategy;
+    public void setSpotAssignmentStrategy(SpotAssignmentStrategyType spotAssignmentStrategyType) {
+        this.spotAssignmentStrategyType = spotAssignmentStrategyType;
     }
 }
